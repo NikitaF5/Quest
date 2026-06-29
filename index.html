@@ -1,41 +1,95 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Квестовые ветки — все моды</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Квестовые ветки — Farmer's Delight · Mekanism · Vampirism · Create · Industrial Upgrade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --accent:#2fd6c6; --accent-dim:#1c9488;
+    --herb:#8fc26b; --herb-dim:#5f8a47;
+    --gold:#f2c14e;
+    --cream:#eef3f2; --muted:#9fb0ad; --muted2:#5f7370;
+    --board:#16201f; --board2:#1c2b29; --line:#2b3d3b;
+    --bgA:#0b1417; --bgB:#0f1d1b;
+  }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Rubik',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;background:#0a0d0d}
-  .mod{--accent:#2fd6c6;--accent-dim:#1c9488;--herb:#8fc26b;--herb-dim:#5f8a47;--gold:#f2c14e;
-    --cream:#eef3f2;--muted:#9fb0ad;--muted2:#5f7370;--board:#16201f;--board2:#1c2b29;--line:#2b3d3b;--bgA:#0b1417;--bgB:#0f1d1b;
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 600px at 12% -5%, var(--bgB) 0%, transparent 55%),
+      radial-gradient(900px 500px at 100% 100%, var(--bgB) 0%, transparent 50%),
+      var(--bgA);
     color:var(--cream);
-    background:radial-gradient(1200px 600px at 12% -2%, var(--bgB) 0%, transparent 55%), var(--bgA);
-    padding-bottom:34px;break-after:page;page-break-after:always}
-  .mod:last-child{break-after:auto;page-break-after:auto}
-  .hero{position:relative;padding:40px 24px 24px;text-align:center;border-bottom:1px solid var(--line)}
-  .eyebrow{font-family:'JetBrains Mono',monospace;color:var(--accent);letter-spacing:.3em;text-transform:uppercase;font-size:11px;margin-bottom:12px}
-  .hero h1{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:44px;line-height:1.03;color:var(--cream)}
+    font-family:'Rubik',system-ui,sans-serif;line-height:1.5;
+    padding:0 0 80px;-webkit-font-smoothing:antialiased;
+    transition:background .4s ease;
+  }
+
+  /* ---- TAB BAR ---- */
+  .tabs{
+    position:sticky;top:0;z-index:50;
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    padding:13px 14px;
+    background:rgba(8,12,12,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .tab{
+    font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;
+    letter-spacing:.05em;font-size:13.5px;
+    color:var(--muted);background:transparent;
+    border:1px solid transparent;border-radius:10px;
+    padding:8px 14px;cursor:pointer;transition:.16s;display:flex;align-items:center;gap:8px;
+  }
+  .tab .tdot{width:10px;height:10px;border-radius:3px;background:var(--td,#888)}
+  .tab:hover{color:var(--cream);background:rgba(255,255,255,.04)}
+  .tab.active{color:#0c1212;background:var(--td);border-color:var(--td)}
+  .tab.active .tdot{background:rgba(0,0,0,.45)}
+
+  /* ---- HERO ---- */
+  .hero{position:relative;padding:46px 22px 26px;text-align:center;border-bottom:1px solid var(--line);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(90deg, color-mix(in srgb, var(--accent) 9%, transparent) 0 2px, transparent 2px 8px);opacity:.5}
+  .eyebrow{font-family:'JetBrains Mono',monospace;color:var(--accent);letter-spacing:.32em;text-transform:uppercase;font-size:11.5px;margin-bottom:13px}
+  .hero h1{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+    font-size:clamp(28px,6.5vw,54px);line-height:1.03;color:var(--cream);
+    text-shadow:0 2px 0 #000, 0 0 26px color-mix(in srgb, var(--accent) 28%, transparent)}
   .hero h1 .ac{color:var(--accent)}
-  .hero p.sub{max-width:680px;margin:13px auto 0;color:var(--muted);font-size:14px}
-  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin:18px auto 0;max-width:720px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+  .hero p.sub{max-width:640px;margin:14px auto 0;color:var(--muted);font-size:14.5px}
+  .legend{display:flex;flex-wrap:wrap;gap:9px 18px;justify-content:center;margin:20px auto 0;max-width:720px;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
   .legend span{display:inline-flex;align-items:center;gap:7px}
   .legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
   .dot-task{background:var(--accent)} .dot-rew{background:var(--herb)} .dot-star{color:var(--gold);font-style:normal}
-  .timeline{max-width:1180px;margin:0 auto;padding:8px 20px 0}
-  .stage{position:relative;padding:26px 0 4px;break-inside:avoid;page-break-inside:avoid}
-  .stage-head{display:flex;align-items:center;gap:15px;margin-bottom:16px}
-  .stage-num{flex:0 0 auto;width:50px;height:50px;border-radius:13px;display:grid;place-items:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:23px;color:#10100c}
+
+  /* ---- TIMELINE ---- */
+  .timeline{max-width:1180px;margin:0 auto;padding:8px 18px 0;position:relative}
+  .stage{position:relative;padding:32px 0 6px}
+  .stage::before{content:"";position:absolute;left:26px;top:-8px;bottom:0;width:3px;background:var(--line);border-radius:3px;z-index:0}
+  @media(max-width:680px){.stage::before{left:18px}}
+  .stage-head{position:relative;z-index:2;display:flex;align-items:center;gap:15px;margin-bottom:18px}
+  .stage-num{flex:0 0 auto;width:54px;height:54px;border-radius:14px;display:grid;place-items:center;
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:25px;color:#10100c;
+    box-shadow:0 0 0 4px var(--bgA), 0 6px 18px rgba(0,0,0,.5)}
+  @media(max-width:680px){.stage-num{width:40px;height:40px;font-size:19px;border-radius:11px}}
   .stage-title{display:flex;flex-direction:column;gap:2px}
-  .stage-title .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2)}
-  .stage-title h2{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:26px;line-height:1.05}
-  .stage-title .desc{color:var(--muted);font-size:12.5px;max-width:620px}
-  .quests{font-size:0}
-  .q{display:inline-block;width:32%;margin:0 2% 12px 0;vertical-align:top;font-size:13px;
-    position:relative;background:linear-gradient(180deg,var(--board2),var(--board));border:1px solid var(--line);border-radius:13px;padding:13px 13px 0;overflow:hidden;break-inside:avoid;page-break-inside:avoid}
-  .q:nth-child(3n){margin-right:0}
+  .stage-title .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted2)}
+  .stage-title h2{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:clamp(19px,4.2vw,29px);line-height:1.05}
+  .stage-title .desc{color:var(--muted);font-size:13px;max-width:580px}
+
+  .quests{position:relative;z-index:1;margin-left:62px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:13px}
+  @media(max-width:680px){.quests{margin-left:38px;grid-template-columns:1fr}}
+
+  .q{position:relative;background:linear-gradient(180deg,var(--board2),var(--board));border:1px solid var(--line);
+    border-radius:13px;padding:13px 13px 0;overflow:hidden;transition:transform .14s,border-color .14s,box-shadow .14s}
   .q::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);opacity:.85}
+  .q:hover{transform:translateY(-3px);border-color:var(--accent-dim);box-shadow:0 10px 24px rgba(0,0,0,.45)}
   .q-top{display:flex;gap:11px;align-items:flex-start}
-  .icon{flex:0 0 auto;width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:23px;line-height:1;background:#0c0f0e;border:1px solid var(--line)}
+  .icon{flex:0 0 auto;width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:24px;line-height:1;
+    background:#0c0f0e;border:1px solid var(--line);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--accent) 10%,transparent)}
   .q-headtext{flex:1;min-width:0}
   .q-id{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:.04em}
   .q-name{font-weight:600;font-size:15px;line-height:1.2;margin-top:2px;color:var(--cream)}
@@ -43,3320 +97,418 @@
   .stars .off{color:var(--muted2)}
   .q-task{font-size:12.5px;color:var(--muted);margin:10px 0 11px}
   .q-task b{color:#cdd8d6;font-weight:500}
-  .reward{margin:0 -13px;padding:9px 13px 11px;background:rgba(143,194,107,.10);border-top:1px solid rgba(143,194,107,.24)}
+  .reward{margin:0 -13px;padding:9px 13px 11px;
+    background:linear-gradient(180deg, color-mix(in srgb,var(--herb) 7%,transparent), color-mix(in srgb,var(--herb) 13%,transparent));
+    border-top:1px solid color-mix(in srgb,var(--herb) 24%,transparent)}
   .reward .rlabel{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--herb-dim);margin-bottom:4px;display:flex;align-items:center;gap:6px}
   .reward .rlabel::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--herb)}
   .reward .rtext{font-size:12.5px;color:#dde9d4}
   .reward .rtext em{color:var(--herb);font-style:normal;font-weight:600}
-  .closing{max-width:900px;margin:34px auto 0;padding:22px;border:1px dashed var(--line);border-radius:16px;text-align:center}
-  .closing h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:18px;color:var(--accent);margin-bottom:8px}
-  .closing p{color:var(--muted);font-size:13px;max-width:720px;margin:0 auto}
-  @media (max-width:760px){ .q{width:100%;margin-right:0} .hero h1{font-size:32px} }
-  @media print{ .q{width:32%;margin:0 2% 12px 0} .q:nth-child(3n){margin-right:0} }
-</style></head><body>
-  <div class="mod" style="--accent:#e8923b;--accent-dim:#b56b29;--bgA:#15110d;--bgB:#1d1812">
-    <header class="hero">
-      <div class="eyebrow">Кулинария · фермерство · Farmer's Delight + аддоны</div>
-      <h1>Кулинарная <span class="ac">сага</span> Farmer's Delight</h1>
-      <p class="sub">7 этапов и 62 квеста: от первой грядки до пиршества Края. Базовый FD + Nether's / End's Delight, Brewin' & Chewin', Cultural Delights, Delightful.</p>
-      <div class="legend">
-        <span><i class="dot-task"></i>задача</span>
-        <span><i class="dot-rew"></i>награда</span>
-        <span><i class="dot-star">★</i>сложность / объём</span>
+
+  .closing{max-width:900px;margin:46px auto 0;padding:24px 22px;border:1px dashed var(--line);border-radius:16px;background:rgba(0,0,0,.28);text-align:center}
+  .closing h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:19px;color:var(--accent);margin-bottom:8px}
+  .closing p{color:var(--muted);font-size:13.5px;max-width:700px;margin:0 auto}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <header class="hero">
+    <div class="eyebrow" id="eyebrow"></div>
+    <h1 id="title"></h1>
+    <p class="sub" id="sub"></p>
+    <div class="legend">
+      <span><i class="dot-task"></i>задача</span>
+      <span><i class="dot-rew"></i>награда</span>
+      <span><i class="dot-star">★</i>сложность / объём</span>
+    </div>
+  </header>
+
+  <main class="timeline" id="board"></main>
+
+  <section class="closing">
+    <h3>Логика наград</h3>
+    <p id="closing-text"></p>
+  </section>
+
+<script>
+/* ============ DATA ============ */
+const MODS = [
+{
+  id:"fd", name:"Farmer's Delight", td:"#e8923b",
+  theme:{accent:"#e8923b",accentDim:"#b56b29",bgA:"#15110d",bgB:"#1d1812"},
+  eyebrow:"Кулинария · фермерство · Farmer's Delight + аддоны",
+  titleHTML:'Кулинарная <span class="ac">сага</span> Farmer\'s Delight',
+  sub:"7 этапов и 62 квеста: от первой грядки до пиршества Края. Базовый FD + Nether's / End's Delight, Brewin' & Chewin', Cultural Delights, Delightful.",
+  closing:"Вырастил культуру → семена + ведро воды, чтобы ферма не стояла. Приготовил блюдо → ингредиент для следующего рецепта. Добыл мясо / пожарил стейк → 2 яйца призыва существа; приготовил из него блюдо → ещё 2 яйца на следующего зверя.",
+  stages:[
+    {n:1,color:"#e5484d",tag:"Этап 01",title:"Первые шаги",desc:"Базовые культуры, почва и вся кухонная утварь: нож, доска, печь, сковорода, котёл.",quests:[
+      {ic:"🍅",name:"Дикий урожай",d:1,task:"Найди и собери дикие культуры: томат, лук, капусту, рис, свёклу.",rew:"по 4 семечка каждой культуры + <em>ведро воды</em>"},
+      {ic:"🪨",name:"Чёрная земля",d:1,task:"Скрафти <b>Органический компост</b> из гнили, костной муки и земли.",rew:"8× органического компоста"},
+      {ic:"💧",name:"Жирная почва",d:1,task:"Дай компосту рядом с водой превратиться в <b>Плодородную почву</b>.",rew:"2× плодородной почвы + <em>4× костная мука</em>"},
+      {ic:"🔪",name:"Острый нож",d:1,task:"Скрафти <b>Нож</b> — главный инструмент нарезки.",rew:"железный слиток + кремень"},
+      {ic:"🪵",name:"Разделочная доска",d:1,task:"Поставь доску и разделай первый продукт ножом.",rew:"8× досок + верёвка"},
+      {ic:"🔥",name:"Печь топится",d:2,task:"Скрафти <b>Печь</b> (Stove) — источник тепла для готовки.",rew:"8× кирпичей + 4× уголь"},
+      {ic:"🍳",name:"Сковорода шкворчит",d:2,task:"Скрафти <b>Сковороду</b> и пожарь яичницу (Fried Egg).",rew:"<em>2× яйцо призыва Курицы</em> — старт птицефермы"},
+      {ic:"🍲",name:"Котелок на огне",d:2,task:"Скрафти <b>Котёл</b> (Cooking Pot) на печь.",rew:"16× мисок + ведро воды"},
+      {ic:"🍚",name:"Первая похлёбка",d:2,task:"Свари самое простое блюдо — Cooked Rice.",rew:"8× рис + <em>ингредиент для след. рецепта</em>"},
+    ]},
+    {n:2,color:"#f2762e",tag:"Этап 02",title:"Огород и хлев",desc:"Полное земледелие FD, плодородная пашня, грибные колонии и старт животноводства через нарезку.",quests:[
+      {ic:"🌾",name:"Мастер грядок",d:2,task:"Вырасти и собери все базовые культуры FD: томат, лук, капуста, рис.",rew:"ведро воды + по стопке семян"},
+      {ic:"🟫",name:"Богатая пашня",d:2,task:"Сделай мотыгой <b>Плодородную пашню</b> (Rich Farmland).",rew:"6× плодородной почвы + костная мука"},
+      {ic:"🍄",name:"Грибная колония",d:2,task:"Вырасти грибную колонию на плодородной почве.",rew:"8× красных + бурых грибов"},
+      {ic:"🧅",name:"Связки и ящики",d:1,task:"Скрафти связки лука/моркови и продуктовый ящик.",rew:"8× верёвка + сундук-корзина"},
+      {ic:"🐄",name:"Первый стейк",d:2,task:"Добудь говядину и пожарь <b>Стейк</b> на сковороде.",rew:"<em>2× яйцо призыва Свиньи</em>"},
+      {ic:"🥓",name:"Бекон с яйцом",d:2,task:"Нарежь свинину в бекон, приготовь Bacon &amp; Eggs.",rew:"<em>2× яйцо призыва Овцы</em>"},
+      {ic:"🐑",name:"Бараньи отбивные",d:3,task:"Нарежь баранину ножом, приготовь Roasted Mutton Chops.",rew:"<em>2× яйцо призыва Коровы</em> — замыкаем стадо"},
+      {ic:"🐔",name:"Куриные кусочки",d:2,task:"Разделай курицу на доске и приготовь блюдо.",rew:"<em>2× яйцо призыва Кролика</em>"},
+      {ic:"🐰",name:"Кроличья ферма",d:2,task:"Разведи кроликов и собери крольчатину.",rew:"<em>2× яйцо призыва Грибной коровы</em> + морковь"},
+      {ic:"🥩",name:"Фарш и нарезка",d:2,task:"Сделай Minced Beef и мясные кусочки на доске.",rew:"8× досок + железо"},
+    ]},
+    {n:3,color:"#f5a623",tag:"Этап 03",title:"Кухня кипит",desc:"Котёл во всю мощь: супы и рагу с эффектом Comfort, рисовые блюда, паста и салаты.",quests:[
+      {ic:"🥕",name:"Овощной суп",d:2,task:"Свари Vegetable Soup (Comfort — пассивное лечение).",rew:"набор: морковь, картофель, капуста"},
+      {ic:"🍅",name:"Соус и томатный суп",d:2,task:"Сделай Tomato Sauce, затем Tomato Soup.",rew:"16× томатов + бутылочки"},
+      {ic:"🥩",name:"Мясное рагу",d:3,task:"Свари Beef Stew.",rew:"4× говядина + картофель"},
+      {ic:"🐰",name:"Кроличье рагу",d:3,task:"Свари Rabbit Stew.",rew:"2× крольчатина + морковь"},
+      {ic:"🦴",name:"Костный бульон",d:2,task:"Свари Bone Broth.",rew:"8× кость — на будущий собачий корм"},
+      {ic:"🐟",name:"Рыбные похлёбки",d:3,task:"Свари Fish Stew и Baked Cod Stew.",rew:"треска/лосось + сухие водоросли"},
+      {ic:"🍚",name:"Жареный рис",d:2,task:"Приготовь Fried Rice.",rew:"16× рис + яйцо"},
+      {ic:"🍄",name:"Грибной рис",d:2,task:"Приготовь Mushroom Rice.",rew:"грибная колония + споры"},
+      {ic:"🍝",name:"Паста с фрикадельками",d:3,task:"Сделай Raw Pasta и свари Pasta with Meatballs.",rew:"8× сырая паста + соус"},
+      {ic:"🥗",name:"Смешанный салат",d:2,task:"Собери Mixed Salad на верстаке.",rew:"семена овощей + ведро воды"},
+      {ic:"🍓",name:"Фруктовый салат",d:2,task:"Собери Fruit Salad.",rew:"сладкие ягоды + яблоки"},
+    ]},
+    {n:4,color:"#f2c14e",tag:"Этап 04",title:"Высокая кухня",desc:"Премиум-блюда с Nourishment, пиршества на компанию, пироги и напитки-зелья.",quests:[
+      {ic:"🍗",name:"Жареная курица",d:3,task:"Пиршество Roast Chicken — ставится и едят из миски.",rew:"<em>2× яйцо призыва Курицы</em> + миски"},
+      {ic:"🍖",name:"Медовый окорок",d:3,task:"Пиршество Honey Glazed Ham (Nourishment 5 мин).",rew:"4× мёд + свинина"},
+      {ic:"🥧",name:"Пастуший пирог",d:3,task:"Пиршество Shepherd's Pie.",rew:"баранина + картофель"},
+      {ic:"🎃",name:"Фаршированная тыква",d:3,task:"Пиршество Stuffed Pumpkin.",rew:"семена тыквы + рис"},
+      {ic:"🍣",name:"Ассорти роллов",d:4,task:"Пиршество Rice Roll Medley — режется на отдельные роллы.",rew:"лосось/треска + сухие водоросли"},
+      {ic:"🍝",name:"Высокая паста",d:4,task:"Squid Ink Pasta, Vegetable Noodles или Pasta with Mutton Chop.",rew:"16× паста + чернила кальмара"},
+      {ic:"🧁",name:"Пироги и торты",d:4,task:"Испеки Sweet Berry Cheesecake / Chocolate Pie и нарежь ножом.",rew:"яйца + сахар + коржи"},
+      {ic:"🍫",name:"Горячее какао",d:3,task:"Свари Hot Cocoa (снимает 1 негативный эффект).",rew:"8× какао-бобы + молоко"},
+      {ic:"🍎",name:"Яблочный сидр",d:3,task:"Свари Apple Cider (даёт Absorption I).",rew:"8× яблоки + стеклянные бутылочки"},
+      {ic:"🍮",name:"Светящийся крем",d:3,task:"Свари Glow Berry Custard.",rew:"светящиеся ягоды + бутылочки"},
+      {ic:"🍉",name:"Сок и эскимо",d:2,task:"Сделай Melon Juice и Melon Popsicle.",rew:"семена арбуза + лёд"},
+      {ic:"🐕",name:"Корм для питомцев",d:3,task:"Сделай Dog Food и Horse Feed.",rew:"<em>2× яйцо призыва Волка + 2× Лошади</em>"},
+    ]},
+    {n:5,color:"#9bcb3c",tag:"Этап 05",title:"Пекло · Nether's Delight",desc:"Кухня Нижнего мира: чернокаменная печь, адские грядки, хоглины и стрейдеры.",quests:[
+      {ic:"🔥",name:"Адская кухня",d:3,task:"Скрафти Печь из чернокамня (Blackstone Stove).",rew:"16× чернокамень"},
+      {ic:"🌱",name:"Адские грядки",d:3,task:"Вырасти адский нарост и Propelplant Cane.",rew:"8× адский нарост"},
+      {ic:"🍢",name:"Адский шашлык",d:3,task:"Приготовь Nether Skewer из хоглиньей вырезки.",rew:"хоглинья вырезка + угольки"},
+      {ic:"🐗",name:"Фаршированный хоглин",d:4,task:"Пиршество Stuffed Hoglin.",rew:"<em>2× яйцо призыва Хоглина</em> + миски"},
+      {ic:"🍄",name:"Тёмный салат",d:2,task:"Собери Nether Salad из багровых/искажённых грибов.",rew:"8× грибов Нижнего"},
+      {ic:"🌶️",name:"Жгучая похлёбка",d:4,task:"Острое блюдо со Strider.",rew:"<em>2× яйцо призыва Лавапрыга</em>"},
+    ]},
+    {n:6,color:"#3fc6c2",tag:"Этап 06",title:"Край света · End's Delight",desc:"Кулинария Энда: эндерская печь, филе шалкеров, хорус-блюда и редкие эффекты.",quests:[
+      {ic:"🌫️",name:"Эндерская печь",d:4,task:"Скрафти Endstone Stove и Chorus Fruit Crate.",rew:"16× эндер-камень"},
+      {ic:"🔪",name:"Филе шалкера",d:4,task:"Добудь Shulker Fillet ножом на доске.",rew:"4× шалкеровая ракушка"},
+      {ic:"🍝",name:"Жемчужная паста",d:4,task:"Приготовь Pearl Pasta.",rew:"4× эндер-жемчуг"},
+      {ic:"🥘",name:"Эндер-паэлья",d:4,task:"Свари Ender Paella (даёт Resistance).",rew:"16× хорус-фрукт"},
+      {ic:"🥧",name:"Хорус-десерты",d:3,task:"Сделай Chorus Pie и Chorus Stew.",rew:"4× цветок хоруса"},
+      {ic:"🐚",name:"Фаршированный шалкер",d:5,task:"Финальное пиршество Stuffed Shulker.",rew:"8× шалкеровая ракушка + трофей левитации"},
+    ]},
+    {n:7,color:"#b07ad6",tag:"Этап 07",title:"Мастер-повар · аддоны и финал",desc:"Брожение (Brewin' & Chewin'), мировая кухня (Cultural Delights / Delightful) и большой финал.",quests:[
+      {ic:"🛢️",name:"Бродильня",d:3,task:"Brewin' & Chewin': скрафти Бочку брожения.",rew:"бочка + закваска/дрожжи"},
+      {ic:"🍺",name:"Первая бражка",d:3,task:"Сбреди напиток — эль или медовуху.",rew:"стопка бутылок + ячмень/мёд"},
+      {ic:"🧀",name:"Брожёная закуска",d:3,task:"Сделай ферментированную еду (сыр / закуску).",rew:"8× молоко"},
+      {ic:"🍱",name:"Мировая кухня",d:4,task:"Cultural Delights: приготовь Суши, Карри и Тако.",rew:"набор экзотических ингредиентов"},
+      {ic:"🌮",name:"Гурман без границ",d:4,task:"Приготовь 5 блюд из Cultural Delights / Delightful.",rew:"редкие семена культур аддонов"},
+      {ic:"🍽️",name:"Пир на весь мир",d:5,task:"Выставь все 5+ пиршеств одновременно за одним столом.",rew:"декор-набор кухни: шкафы, ящики, вывески"},
+      {ic:"⭐",name:"Шеф-повар НМТП",d:5,task:"Приготовь и съешь каждое блюдо ванильного FD (как «Eat a course of every meal»).",rew:"нетеритовый нож + золотой котёл-трофей"},
+    ]},
+  ]
+},
+{
+  id:"mek", name:"Mekanism", td:"#2fd6c6",
+  theme:{accent:"#2fd6c6",accentDim:"#1c9488",bgA:"#0b1417",bgB:"#0f1d1b"},
+  eyebrow:"Tech · переработка руды · ядерная и термоядерная энергия",
+  titleHTML:'Индустрия <span class="ac">Mekanism</span>',
+  sub:"6 этапов прогрессии IC-наследника: от теплогенератора и стали до x5-переработки, деления, синтеза и антиматерии. Аддоны Generators / Tools / Additions вплетены в этапы.",
+  closing:"Переработал руду → больше сырья + сплав для следующей машины. Собрал машину → схема/Tier Installer следующего тира. Дошёл до реактора → полоний на MekaSuit, а синтез → антиматерия-трофей.",
+  stages:[
+    {n:1,color:"#ff7a3d",tag:"Этап 01",title:"Розжиг",desc:"Энергия и сталь — фундамент всего мода.",quests:[
+      {ic:"⚙️",name:"Тепловой генератор",d:1,task:"Скрафти <b>Heat Generator</b>, запитай лавой/топливом.",rew:"8× универсальных кабелей + уголь"},
+      {ic:"🔩",name:"Осмиевая жила",d:1,task:"Добудь осмий и выплавь слитки.",rew:"8× осмий + железная кирка"},
+      {ic:"🏭",name:"Металлургический инфузер",d:2,task:"Скрафти <b>Metallurgic Infuser</b> и запитай.",rew:"4× железо + редстоун"},
+      {ic:"🧱",name:"Сталь",d:2,task:"Enriched Iron → Steel Dust → выплавь <b>Steel</b>.",rew:"8× сталь"},
+      {ic:"🔋",name:"Энергетическая таблетка",d:2,task:"Скрафти Energy Tablet и Steel Casing.",rew:"4× золото"},
+      {ic:"🟣",name:"Базовая схема",d:2,task:"Сделай Basic Control Circuit и Infused Alloy.",rew:"<em>2× базовая схема</em> для след. машины"},
+      {ic:"🪓",name:"Атомный дизассемблер",d:2,task:"Mekanism Tools: скрафти Atomic Disassembler.",rew:"паксель (Paxel)"},
+    ]},
+    {n:2,color:"#2fd6c6",tag:"Этап 02",title:"Удвоение руды · x2",desc:"Первая переработка: камера обогащения, печь, дробилка, фабрики.",quests:[
+      {ic:"✨",name:"Камера обогащения",d:2,task:"Скрафти <b>Enrichment Chamber</b>.",rew:"2× базовая схема + сталь"},
+      {ic:"⛏️",name:"Двойная руда",d:2,task:"Переработай руду в 2× пыль и выплавь.",rew:"стопка железной руды + энергия"},
+      {ic:"🔥",name:"Энергетическая печь",d:2,task:"Скрафти Energized Smelter.",rew:"16× уголь"},
+      {ic:"🪨",name:"Дробилка",d:2,task:"Скрафти Crusher.",rew:"<em>4× обогащённый редстоун</em>"},
+      {ic:"🌀",name:"Обогащённые материалы",d:1,task:"Сделай Enriched Carbon/Redstone (x8 эффективность).",rew:"16× редстоун"},
+      {ic:"🔧",name:"Фабрика · Basic",d:3,task:"Через Tier Installer сделай Basic Factory.",rew:"<em>Tier Installer</em>"},
+    ]},
+    {n:3,color:"#3a9be0",tag:"Этап 03",title:"Утроение · x3 + газы",desc:"Газовая химия: электролизёр, очистка, инфузер, реактивный ранец.",quests:[
+      {ic:"💨",name:"Электролизёр",d:3,task:"Electrolytic Separator: вода → водород + кислород.",rew:"4× ведро воды + бак"},
+      {ic:"🧪",name:"Камера очистки",d:3,task:"Purification Chamber: руда → 3 куска (x3).",rew:"<em>2× усиленный сплав</em>"},
+      {ic:"🛢️",name:"Газовый бак",d:2,task:"Скрафти Basic Gas Tank.",rew:"8× осмий"},
+      {ic:"⚗️",name:"Химический инфузер",d:3,task:"Chemical Infuser: получи HCl.",rew:"<em>продвинутая схема</em>"},
+      {ic:"🚀",name:"Реактивный ранец",d:3,task:"Скрафти Jetpack на водороде.",rew:"бак водорода + чарджпад"},
+      {ic:"🏭",name:"Фабрика · Advanced",d:3,task:"Advanced Factory — 5 слотов.",rew:"Tier Installer (Advanced)"},
+    ]},
+    {n:4,color:"#a06bdb",tag:"Этап 04",title:"x4 / x5 и продвинутая техника",desc:"Слизь, кристаллы, очищенный обсидиан, шахтёр, QIO.",quests:[
+      {ic:"💉",name:"Камера хим. инъекций",d:4,task:"Chemical Injection Chamber — x4.",rew:"<em>2× элитная схема</em>"},
+      {ic:"🌫️",name:"Растворение и кристаллы",d:5,task:"Dissolution → Washer → Crystallizer (x5).",rew:"серная кислота + слитки"},
+      {ic:"🪙",name:"Очищенный обсидиан",d:4,task:"Сделай Refined Obsidian Ingot (Osmium Compressor).",rew:"<em>атомный сплав</em>"},
+      {ic:"⛏️",name:"Цифровой шахтёр",d:4,task:"Скрафти Digital Miner + фильтры.",rew:"фильтры + энергия"},
+      {ic:"🌐",name:"Квантовый телепортёр",d:4,task:"Quantum Entangloporter (энергия/газ/предметы).",rew:"телепорт-узлы"},
+      {ic:"📡",name:"QIO-хранилище",d:4,task:"Собери QIO Drive Array + Dashboard.",rew:"QIO Drive"},
+    ]},
+    {n:5,color:"#f2c14e",tag:"Этап 05",title:"Ядерная эра",desc:"Деление, охлаждение, отходы, MekaSuit, турбина. Осторожно — радиация!",quests:[
+      {ic:"🌬️",name:"Генераторы",d:3,task:"Mekanism Generators: ветряки, био- и газогенератор.",rew:"Advanced Solar Generator"},
+      {ic:"☢️",name:"Деление",d:5,task:"Собери Fission Reactor и держи <1200K.",rew:"<em>4× полониевые пеллеты</em>"},
+      {ic:"🧊",name:"Охлаждение",d:4,task:"Подведи воду или натрий-теплоноситель.",rew:"натриевый теплоноситель"},
+      {ic:"🛡️",name:"Утилизация отходов",d:4,task:"Безопасно перерабатывай ядерные отходы.",rew:"радиационная защита"},
+      {ic:"💠",name:"МекаКостюм",d:5,task:"Скрафти MekaSuit + Meka-Tool (полоний).",rew:"<em>модуль улучшения MekaSuit</em>"},
+      {ic:"⚡",name:"Паровая турбина",d:4,task:"Industrial Turbine на паре реактора.",rew:"большой запас энергии"},
+    ]},
+    {n:6,color:"#e5484d",tag:"Этап 06",title:"Синтез и антиматерия",desc:"Термояд, SPS, антиматерия, креативный полёт — финал.",quests:[
+      {ic:"🌟",name:"Термоядерный реактор",d:5,task:"Запусти Fusion Reactor (дейтерий/тритий).",rew:"лазер-модуль + гогглы"},
+      {ic:"🔭",name:"SPS",d:5,task:"Собери Supercritical Phase Shifter.",rew:"<em>антиматериальные пеллеты</em>"},
+      {ic:"🧬",name:"Антиматерия",d:5,task:"Получи первую антиматерию.",rew:"гранулятор-трофей"},
+      {ic:"🛩️",name:"Креативный полёт",d:5,task:"Прокачай MekaSuit до полёта.",rew:"набор модулей: vision, jetpack, teleport"},
+      {ic:"🏆",name:"Мастер Mekanism",d:5,task:"Заверши x5-переработку и собери Робита.",rew:"Робит-компаньон + золотой инфузер-трофей"},
+    ]},
+  ]
+},
+{
+  id:"vamp", name:"Vampirism", td:"#e23a4a",
+  theme:{accent:"#e23a4a",accentDim:"#9c2330",bgA:"#100608",bgB:"#1d0a0e"},
+  eyebrow:"RPG · кровь · фракции · ритуалы · лорды",
+  titleHTML:'Кровь и <span class="ac">Vampirism</span>',
+  sub:"6 этапов на две фракции: путь Вампира и путь Охотника, ритуалы и алтари, навыки, лорды с миньонами. Аддоны Bloodlines, Vampiric Ageing, Vampire's Delight, Werewolves в финале.",
+  closing:"Покормился / поднял уровень → кровь + очко навыка. Победил барона → ритуальный предмет для следующего алтаря. Стал лордом → minion binding, а ранги дают новые слоты миньонов.",
+  stages:[
+    {n:1,color:"#e23a4a",tag:"Этап 01",title:"Обращение",desc:"Выбор пути: стать вампиром или охотником на них.",quests:[
+      {ic:"🦇",name:"Укус судьбы",d:1,task:"Заразись Sanguinare Vampiris (укус/инъекция) и обратись.",rew:"<em>4× бутыль крови</em>"},
+      {ic:"✝️",name:"Или путь Охотника",d:1,task:"Останься человеком и вступи в охотники.",rew:"деревянный кол + чеснок"},
+      {ic:"🩸",name:"Первая кровь",d:1,task:"Выпей кровь животного или жителя.",rew:"8× бутыль крови"},
+      {ic:"⚰️",name:"Гроб",d:1,task:"Скрафти и поставь Гроб, чтобы спать днём.",rew:"8× тёмных замковых кирпича"},
+      {ic:"🌑",name:"Алтарь вдохновения",d:2,task:"Подними уровень 2–4 на Altar of Inspiration.",rew:"<em>очко навыка</em> + кровь"},
+    ]},
+    {n:2,color:"#b01e34",tag:"Этап 02",title:"Молодая кровь · Вампир",desc:"Алтарь вливания, первые навыки, вампирский лес и барон.",quests:[
+      {ic:"🧛",name:"Алтарь Вливания",d:3,task:"Построй Altar of Infusion с пилларами (очки структуры).",rew:"<em>чистая кровь (Pure Blood)</em>"},
+      {ic:"🦇",name:"Облик летучей мыши",d:2,task:"Открой навык Bat Transformation.",rew:"очко навыка"},
+      {ic:"👁️",name:"Ночное зрение",d:2,task:"Открой Night Vision и скорость.",rew:"очко навыка"},
+      {ic:"🗡️",name:"Кровавое оружие",d:3,task:"Скрафти вампирский меч и заряди кровью.",rew:"кровавый точильный камень"},
+      {ic:"🌲",name:"Вампирский лес",d:3,task:"Найди биом и логово вампиров.",rew:"8× клыки + книга вампира"},
+      {ic:"🦹",name:"Барон вампиров",d:4,task:"Победи Vampire Baron, добудь ритуальный предмет.",rew:"<em>предмет для ритуала уровня</em>"},
+    ]},
+    {n:3,color:"#8e2ad6",tag:"Этап 03",title:"Высший вампир",desc:"Уровни 5–14, мощные навыки и природная броня.",quests:[
+      {ic:"⬆️",name:"Уровни 5–14",d:4,task:"Прокачайся ритуалами до 14 уровня.",rew:"<em>3× очко навыка</em>"},
+      {ic:"🩹",name:"Воскрешение павших",d:3,task:"Открой навык Revive the Fallen.",rew:"очко навыка"},
+      {ic:"🌫️",name:"Телепортация",d:3,task:"Открой навык телепорта/тумана.",rew:"очко навыка"},
+      {ic:"🛡️",name:"Природная броня",d:3,task:"Достигни брони уровня алмаза без брони.",rew:"плащ вампира"},
+    ]},
+    {n:4,color:"#c9962e",tag:"Этап 04",title:"Арсенал Охотника",desc:"Альтернативная ветка: столы, тренер, оружие против лордов.",quests:[
+      {ic:"🏹",name:"Стол охотника",d:2,task:"Собери Hunter Table + Weapon/Potion Table.",rew:"<em>интел (intel)</em>"},
+      {ic:"✝️",name:"Тренер охотников",d:3,task:"Заплати чистой кровью/клыками, поднимись в уровне.",rew:"арбалет охотника"},
+      {ic:"⚒️",name:"Оружейник",d:3,task:"Прокачай ветку Weapon Smith.",rew:"усиленные болты"},
+      {ic:"🧪",name:"Мастер зелий",d:3,task:"Ветка Brewing Master + антивампирские зелья.",rew:"чесночные бомбы"},
+      {ic:"🔪",name:"Heartseeker / Heartstriker",d:4,task:"Скрафти оружие против вампиров-лордов.",rew:"освящённое серебро"},
+    ]},
+    {n:5,color:"#7a1020",tag:"Этап 05",title:"Лорд и миньоны",desc:"Стань лордом, призывай и веди свою свиту.",quests:[
+      {ic:"👑",name:"«Достоин ли ты?»",d:4,task:"Стань Лордом/Мастером-охотником через задания представителя.",rew:"<em>minion binding / equipment</em>"},
+      {ic:"🧟",name:"Первый миньон",d:3,task:"Призови и снаряди миньона.",rew:"снаряжение миньона"},
+      {ic:"🏰",name:"Ранги",d:4,task:"Поднимись Baron→Viscount→Count→Duke→Prince (или Lieutenant→…→Brigadier).",rew:"<em>+слот миньона</em>"},
+      {ic:"⚔️",name:"Армия",d:5,task:"Управляй пятью миньонами одновременно.",rew:"набор брони для миньонов"},
+      {ic:"🔆",name:"Маяк фракции",d:4,task:"Поставь Beacon, найми Expert-жителя.",rew:"торговля чистой кровью"},
+    ]},
+    {n:6,color:"#5b3fd6",tag:"Этап 06",title:"Кровные линии · аддоны",desc:"Bloodlines, Vampiric Ageing, Vampire's Delight, Werewolves.",quests:[
+      {ic:"🧬",name:"Bloodlines",d:4,task:"Выбери линию (Zealot/Noble/Ectotherm/Bloodknight) через квест.",rew:"<em>Bloodline Fang + ранг</em>"},
+      {ic:"⏳",name:"Vampiric Ageing",d:4,task:"Начни старение после 14 ур., повышай Age Rank.",rew:"бонус возраста"},
+      {ic:"🍷",name:"Vampire's Delight",d:3,task:"Приготовь кровавые блюда (интеграция с Farmer's Delight).",rew:"кровавый ингредиент"},
+      {ic:"🐺",name:"Werewolves",d:4,task:"Родственный мод: обратись в оборотня, качай укус.",rew:"очко навыка оборотня"},
+      {ic:"🏆",name:"Владыка ночи",d:5,task:"Достигни макс. ранга лорда и кровной линии.",rew:"корона-трофей + плащ"},
+    ]},
+  ]
+},
+{
+  id:"create", name:"Create", td:"#d8a13a",
+  theme:{accent:"#d8a13a",accentDim:"#9a7022",bgA:"#0f1419",bgB:"#141d24"},
+  eyebrow:"Кинетика · контрапции · пар и поезда · электричество",
+  titleHTML:'Машинерия <span class="ac">Create</span>',
+  sub:"6 этапов: от водяного колеса и андезита до латуни, секвенс-сборки, паровых поездов, электричества (Crafts & Additions / New Age) и больших проектов. Steam 'n' Rails, Deco, Big Cannons, Enchantment Industry.",
+  closing:"Поставил генератор → шестерни и андезитовый сплав. Собрал пресс → листы. Дошёл до латуни → точные механизмы и электронные лампы. Запустил поезд → рельсы и станция для расширения сети.",
+  stages:[
+    {n:1,color:"#9aa3ad",tag:"Этап 01",title:"Андезит и вращение",desc:"Базовая кинетика: колесо, валы, шестерни, пресс, пила.",quests:[
+      {ic:"🔧",name:"Первое вращение",d:1,task:"Поставь Hand Crank / Water Wheel / Windmill Bearing.",rew:"8× вал + андезит"},
+      {ic:"⚙️",name:"Андезитовый сплав",d:1,task:"Сделай Andesite Alloy.",rew:"<em>16× андезитовый сплав</em>"},
+      {ic:"⚙️",name:"Шестерни",d:1,task:"Скрафти Cogwheel + Large Cogwheel.",rew:"8× шестерни"},
+      {ic:"🪚",name:"Механическая пила",d:2,task:"Поставь Mechanical Saw.",rew:"16× доски"},
+      {ic:"🗜️",name:"Механический пресс",d:2,task:"Штампуй листы прессом.",rew:"<em>8× железный лист</em>"},
+      {ic:"🥽",name:"Снаряжение инженера",d:1,task:"Скрафти Engineer's Goggles + Wrench.",rew:"гогглы"},
+    ]},
+    {n:2,color:"#d8a13a",tag:"Этап 02",title:"Обработка и латунь",desc:"Вентилятор, цинк, латунь, дробильные колёса, электронные лампы.",quests:[
+      {ic:"🌪️",name:"Вентилятор",d:2,task:"Encased Fan: мойка/копчение/обдув лавой.",rew:"промытый гравий + железо"},
+      {ic:"🟡",name:"Цинк и латунь",d:2,task:"Добудь цинк, сделай Brass в Mixer.",rew:"<em>16× латунь</em>"},
+      {ic:"🪣",name:"Бассейн и миксер",d:2,task:"Поставь Basin + Mechanical Mixer.",rew:"8× медный лист"},
+      {ic:"🔩",name:"Дробильные колёса",d:3,task:"Crushing Wheels: руда → x2 дроблёнка.",rew:"16× дроблёная руда"},
+      {ic:"📜",name:"Развёртка",d:2,task:"Поставь Deployer.",rew:"8× латунь"},
+      {ic:"🧩",name:"Электронная лампа",d:3,task:"Brass Casing + Electron Tube.",rew:"<em>4× электронная лампа</em>"},
+    ]},
+    {n:3,color:"#c87f4a",tag:"Этап 03",title:"Сборка и автоматизация",desc:"Рука, крафтеры, секвенс-сборка, табло и логистика.",quests:[
+      {ic:"🤖",name:"Механическая рука",d:3,task:"Собери Mechanical Arm.",rew:"16× латунь"},
+      {ic:"🛠️",name:"Механический крафтер",d:3,task:"Mechanical Crafters для авто-сборки.",rew:"<em>точный механизм</em>"},
+      {ic:"🔁",name:"Sequenced Assembly",d:4,task:"Собери Precision Mechanism по цепочке.",rew:"2× точный механизм"},
+      {ic:"⏱️",name:"Регулятор скорости",d:2,task:"Rotational Speed Controller.",rew:"латунь + шестерни"},
+      {ic:"📦",name:"Воронки и туннели",d:2,task:"Funnels + Smart/Brass Tunnels на лентах.",rew:"16× конвейерная лента"},
+      {ic:"🖥️",name:"Дисплеи",d:2,task:"Display Link + Display Board (табло).",rew:"16× андезитовый сплав"},
+    ]},
+    {n:4,color:"#5b8fb0",tag:"Этап 04",title:"Пар и поезда",desc:"Blaze Burner, паровой двигатель, поезда и Steam 'n' Rails.",quests:[
+      {ic:"🔥",name:"Blaze Burner",d:3,task:"Поймай ифрита, собери Blaze Burner + Cake.",rew:"топливный пирог"},
+      {ic:"🌡️",name:"Паровой двигатель",d:3,task:"Boiler + Steam Engine (вода + тепло).",rew:"8× лист латуни"},
+      {ic:"🚂",name:"Первый поезд",d:4,task:"Train Tracks + Station + Train Assembly.",rew:"<em>32× рельсы</em>"},
+      {ic:"🛤️",name:"Steam 'n' Rails",d:3,task:"Деревянные/монорельсы, проводник, сцепка вагонов.",rew:"семафоры + шапка проводника"},
+      {ic:"📯",name:"Сигналы и гудки",d:3,task:"Train Signals + Steam Whistle.",rew:"16× латунь"},
+    ]},
+    {n:5,color:"#9d6bd6",tag:"Этап 05",title:"Электричество и продвинутое",desc:"Crafts & Additions, New Age, Enchantment Industry, Diesel.",quests:[
+      {ic:"⚡",name:"Crafts & Additions",d:4,task:"Electric Motor + Alternator: мост FE ↔ вращение.",rew:"<em>провода + аккумулятор</em>"},
+      {ic:"🔋",name:"Накопление энергии",d:3,task:"Подключи аккумуляторы и connector.",rew:"электромотор"},
+      {ic:"✨",name:"Enchantment Industry",d:4,task:"Автоматизируй зачарование (Liquid XP + Blaze).",rew:"жидкий опыт"},
+      {ic:"🛢️",name:"Diesel Generators",d:4,task:"Нефтяная вышка + дизель-генератор.",rew:"бочка нефти"},
+      {ic:"🪐",name:"Create: New Age",d:4,task:"Динамо и электросеть нового поколения.",rew:"продвинутый провод"},
+    ]},
+    {n:6,color:"#6fa84a",tag:"Этап 06",title:"Большие проекты и декор",desc:"Big Cannons, Deco, гигантские контрапции — финал.",quests:[
+      {ic:"💣",name:"Create: Big Cannons",d:5,task:"Собери большую пушку и выстрели.",rew:"32× порох + ядро"},
+      {ic:"🎨",name:"Deco / Copycats+",d:2,task:"Промышленный декор и копикаты.",rew:"декор-набор"},
+      {ic:"🏗️",name:"Гигантская контрапция",d:5,task:"Построй движущуюся машину (drill/harvester rig).",rew:"суперклей + контрапшн-карт"},
+      {ic:"🧱",name:"Фабрика-конвейер",d:4,task:"Полностью автоматизируй производство одного блока.",rew:"64× латунь"},
+      {ic:"🏆",name:"Мастер-инженер",d:5,task:"Заверши секвенс-сборку высшего предмета и авто-завод.",rew:"золотой гаечный ключ-трофей"},
+    ]},
+  ]
+},
+{
+  id:"iu", name:"Industrial Upgrade", td:"#f2b21a",
+  theme:{accent:"#f2b21a",accentDim:"#a87a0e",bgA:"#13110c",bgB:"#1d1a10"},
+  eyebrow:"IC2-наследник · пар → электричество → фотоника → космос",
+  titleHTML:'Магнат <span class="ac">Industrial Upgrade</span>',
+  sub:"6 этапов по прогрессии [IU] denfop: рудные жилы и пар, электрическая эра (наследие Super Solar Panels), модули, ядерная и фотонная энергия, генетика и колонизация планет.",
+  closing:"Пробурил жилу → сырьё + пластины. Собрал паровую машину → кокс и сталь. Перешёл на электричество → схемы и батарея. Освоил фотонику → фотонные ячейки, а космос → детали ракеты для колонии.",
+  stages:[
+    {n:1,color:"#b98a4a",tag:"Этап 01",title:"Примитивная эра",desc:"Рудные жилы, молот, коксовая печь, сталь, первый пар.",quests:[
+      {ic:"⛏️",name:"Рудная жила",d:1,task:"Найди и пробури Ore Vein, добудь сырьё.",rew:"<em>дроблёная руда</em> + молот"},
+      {ic:"🔨",name:"Стальной молот",d:1,task:"Скрафти Steel Hammer для расплющивания пластин.",rew:"8× железная пластина"},
+      {ic:"🏭",name:"Коксовая печь",d:2,task:"Собери Coke Oven: кокс + креозот.",rew:"16× кокс"},
+      {ic:"🧱",name:"Сталь",d:2,task:"Выплавь сталь (кокс + железо).",rew:"8× сталь"},
+      {ic:"💨",name:"Паровой котёл",d:2,task:"Собери Steam Boiler (мультиблок).",rew:"паровые трубы + вода"},
+      {ic:"⚙️",name:"Механический корпус",d:2,task:"Скрафти Mechanical Casing.",rew:"<em>2× корпус</em>"},
+    ]},
+    {n:2,color:"#d49a3a",tag:"Этап 02",title:"Паровые машины",desc:"Карьер, переработка, прокатка, агрокультура.",quests:[
+      {ic:"⛏️",name:"Паровой карьер",d:3,task:"Steam Quarry — автодобыча.",rew:"запас угля и руды"},
+      {ic:"🪨",name:"Паровой мацератор",d:2,task:"Переработай руду паром (x2).",rew:"16× руда"},
+      {ic:"🛞",name:"Паровая прокатка",d:2,task:"Steam Rolling Machine: пластины.",rew:"<em>16× пластина</em>"},
+      {ic:"🔥",name:"Улучшенная коксовая печь",d:3,task:"Проапгрейдь печь.",rew:"8× креозот"},
+      {ic:"🌾",name:"Агрокультура",d:2,task:"Запусти Agrocultures / очиститель почвы.",rew:"семена + удобрение"},
+    ]},
+    {n:3,color:"#3aa0e0",tag:"Этап 03",title:"Электрическая эра",desc:"Провода, солнечные панели, батареи, схемы, EU.",quests:[
+      {ic:"🔌",name:"Провода и изоляторы",d:2,task:"Сделай Wire Insulators, проведи электролинию.",rew:"16× медный провод"},
+      {ic:"☀️",name:"Солнечная панель",d:2,task:"Скрафти Solar Panel (наследие Super Solar Panels).",rew:"<em>продвинутая солнечная панель</em>"},
+      {ic:"🔋",name:"Батарея",d:2,task:"Скрафти RE-Battery / аккумулятор.",rew:"заряженный редстоун"},
+      {ic:"⚡",name:"Конвертер тока",d:3,task:"Electric Current Converter + Charger.",rew:"зарядник"},
+      {ic:"🖥️",name:"Электросхемы",d:3,task:"Сделай электрические схемы и процессоры.",rew:"<em>4× схема</em>"},
+      {ic:"🏭",name:"Электрофабрика",d:3,task:"Электрический мацератор/печь с модулями.",rew:"модуль продуктивности"},
+    ]},
+    {n:4,color:"#8a98a5",tag:"Этап 04",title:"Модули и автоматизация",desc:"Модули, пуллеры, продвинутый карьер, очистка, торговля.",quests:[
+      {ic:"🧩",name:"Модули",d:3,task:"Установи модули продуктивности/скорости в машины.",rew:"2× модуль скорости"},
+      {ic:"📦",name:"Пуллеры и пушеры",d:2,task:"Puller/Pusher модули + трубы.",rew:"16× труба"},
+      {ic:"🏗️",name:"Advanced Steam Quarry",d:3,task:"Собери продвинутый паровой карьер.",rew:"запас ресурсов"},
+      {ic:"🌫️",name:"Очистка воздуха",d:3,task:"Air Purification Station против pollution.",rew:"фильтры"},
+      {ic:"🔄",name:"Торговая машина",d:2,task:"Настрой Trading Machine.",rew:"8× изумруд"},
+    ]},
+    {n:5,color:"#7fd63a",tag:"Этап 05",title:"Ядерная и фотонная эра",desc:"Реактор, радиация, фотонная энергия и машины.",quests:[
+      {ic:"☢️",name:"Ядерный реактор",d:5,task:"Собери реактор и управляй радиацией.",rew:"<em>урановые стержни</em> + защита"},
+      {ic:"🛡️",name:"Радиационная броня",d:4,task:"Скрафти защитный костюм.",rew:"антирад-капсулы"},
+      {ic:"💥",name:"Ядерная бомба (осторожно)",d:4,task:"Скрафти, но не взрывай дома.",rew:"продвинутые материалы"},
+      {ic:"🌟",name:"Фотонная энергия",d:5,task:"Перейди к Photonic Technology.",rew:"<em>фотонные ячейки</em>"},
+      {ic:"🔆",name:"Фотонные машины",d:5,task:"Запитай машины фотонной энергией.",rew:"фотонный процессор"},
+    ]},
+    {n:6,color:"#3fc6c2",tag:"Этап 06",title:"Генетика и космос",desc:"Геномы, мутации, ракеты, колонии, квантовый карьер — финал.",quests:[
+      {ic:"🧬",name:"Генетика",d:4,task:"Centrifuge + Incubator + RNA Assembler, изучи геномы.",rew:"геном-образец"},
+      {ic:"🧪",name:"Мутатрон",d:4,task:"Mutatron + Genetic Stabilizer.",rew:"улучшенный геном"},
+      {ic:"🚀",name:"Космическая программа",d:5,task:"Собери ракету/корабль.",rew:"<em>детали ракеты</em>"},
+      {ic:"🪐",name:"Колонизация",d:5,task:"Основай колонию на другой планете.",rew:"космо-модуль"},
+      {ic:"⚛️",name:"Квантовый карьер",d:5,task:"Quantum Quarry — массовая добыча.",rew:"квантовый процессор"},
+      {ic:"🏆",name:"Магнат индустрии",d:5,task:"Заверши все тиры: пар → электро → фотон → космос.",rew:"золотой реактор-трофей"},
+    ]},
+  ]
+},
+];
+
+/* ============ RENDER ============ */
+const tabsEl=document.getElementById('tabs');
+const board=document.getElementById('board');
+const stars=(d)=>{let s="";for(let i=1;i<=5;i++){s+= i<=d?"★":"<span class='off'>★</span>";}return s;};
+
+MODS.forEach((m,idx)=>{
+  const b=document.createElement('button');
+  b.className='tab'+(idx===0?' active':'');
+  b.style.setProperty('--td',m.td);
+  b.innerHTML=`<span class="tdot"></span>${m.name}`;
+  b.onclick=()=>select(idx);
+  tabsEl.appendChild(b);
+});
+
+function select(idx){
+  const m=MODS[idx];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  const r=document.documentElement.style;
+  r.setProperty('--accent',m.theme.accent);
+  r.setProperty('--accent-dim',m.theme.accentDim);
+  r.setProperty('--bgA',m.theme.bgA);
+  r.setProperty('--bgB',m.theme.bgB);
+  document.getElementById('eyebrow').textContent=m.eyebrow;
+  document.getElementById('title').innerHTML=m.titleHTML;
+  document.getElementById('sub').textContent=m.sub;
+  document.getElementById('closing-text').textContent=m.closing;
+
+  board.innerHTML='';
+  m.stages.forEach(st=>{
+    const sec=document.createElement('section');
+    sec.className='stage';
+    let cards="";
+    st.quests.forEach((q,i)=>{
+      const id=`${st.n}.${String(i+1).padStart(2,'0')}`;
+      cards+=`
+        <article class="q">
+          <div class="q-top">
+            <div class="icon">${q.ic}</div>
+            <div class="q-headtext">
+              <div class="q-id">КВЕСТ ${id}</div>
+              <div class="q-name">${q.name}</div>
+              <div class="stars">${stars(q.d)}</div>
+            </div>
+          </div>
+          <div class="q-task"><b>Задача:</b> ${q.task}</div>
+          <div class="reward">
+            <div class="rlabel">Награда</div>
+            <div class="rtext">${q.rew}</div>
+          </div>
+        </article>`;
+    });
+    sec.innerHTML=`
+      <div class="stage-head">
+        <div class="stage-num" style="background:${st.color}">${st.n}</div>
+        <div class="stage-title">
+          <span class="tag">${st.tag} · ${st.quests.length} квестов</span>
+          <h2>${st.title}</h2>
+          <span class="desc">${st.desc}</span>
+        </div>
       </div>
-    </header>
-    <main class="timeline">
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#e5484d">1</div>
-          <div class="stage-title">
-            <span class="tag">Этап 01 · 9 квестов</span>
-            <h2>Первые шаги</h2>
-            <span class="desc">Базовые культуры, почва и вся кухонная утварь: нож, доска, печь, сковорода, котёл.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍅</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.01</div>
-              <div class="q-name">Дикий урожай</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Найди и собери дикие культуры: томат, лук, капусту, рис, свёклу.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">по 4 семечка каждой культуры + <em>ведро воды</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.02</div>
-              <div class="q-name">Чёрная земля</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Органический компост</b> из гнили, костной муки и земли.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× органического компоста</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💧</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.03</div>
-              <div class="q-name">Жирная почва</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Дай компосту рядом с водой превратиться в <b>Плодородную почву</b>.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">2× плодородной почвы + <em>4× костная мука</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔪</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.04</div>
-              <div class="q-name">Острый нож</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Нож</b> — главный инструмент нарезки.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">железный слиток + кремень</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪵</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.05</div>
-              <div class="q-name">Разделочная доска</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поставь доску и разделай первый продукт ножом.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× досок + верёвка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔥</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.06</div>
-              <div class="q-name">Печь топится</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Печь</b> (Stove) — источник тепла для готовки.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× кирпичей + 4× уголь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍳</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.07</div>
-              <div class="q-name">Сковорода шкворчит</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Сковороду</b> и пожарь яичницу (Fried Egg).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Курицы</em> — старт птицефермы</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍲</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.08</div>
-              <div class="q-name">Котелок на огне</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Котёл</b> (Cooking Pot) на печь.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× мисок + ведро воды</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍚</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.09</div>
-              <div class="q-name">Первая похлёбка</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари самое простое блюдо — Cooked Rice.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× рис + <em>ингредиент для след. рецепта</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#f2762e">2</div>
-          <div class="stage-title">
-            <span class="tag">Этап 02 · 10 квестов</span>
-            <h2>Огород и хлев</h2>
-            <span class="desc">Полное земледелие FD, плодородная пашня, грибные колонии и старт животноводства через нарезку.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌾</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.01</div>
-              <div class="q-name">Мастер грядок</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Вырасти и собери все базовые культуры FD: томат, лук, капуста, рис.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">ведро воды + по стопке семян</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🟫</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.02</div>
-              <div class="q-name">Богатая пашня</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай мотыгой <b>Плодородную пашню</b> (Rich Farmland).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">6× плодородной почвы + костная мука</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍄</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.03</div>
-              <div class="q-name">Грибная колония</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Вырасти грибную колонию на плодородной почве.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× красных + бурых грибов</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧅</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.04</div>
-              <div class="q-name">Связки и ящики</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти связки лука/моркови и продуктовый ящик.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× верёвка + сундук-корзина</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐄</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.05</div>
-              <div class="q-name">Первый стейк</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Добудь говядину и пожарь <b>Стейк</b> на сковороде.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Свиньи</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥓</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.06</div>
-              <div class="q-name">Бекон с яйцом</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Нарежь свинину в бекон, приготовь Bacon &amp; Eggs.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Овцы</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐑</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.07</div>
-              <div class="q-name">Бараньи отбивные</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Нарежь баранину ножом, приготовь Roasted Mutton Chops.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Коровы</em> — замыкаем стадо</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐔</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.08</div>
-              <div class="q-name">Куриные кусочки</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Разделай курицу на доске и приготовь блюдо.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Кролика</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐰</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.09</div>
-              <div class="q-name">Кроличья ферма</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Разведи кроликов и собери крольчатину.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Грибной коровы</em> + морковь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥩</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.10</div>
-              <div class="q-name">Фарш и нарезка</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Minced Beef и мясные кусочки на доске.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× досок + железо</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#f5a623">3</div>
-          <div class="stage-title">
-            <span class="tag">Этап 03 · 11 квестов</span>
-            <h2>Кухня кипит</h2>
-            <span class="desc">Котёл во всю мощь: супы и рагу с эффектом Comfort, рисовые блюда, паста и салаты.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥕</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.01</div>
-              <div class="q-name">Овощной суп</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Vegetable Soup (Comfort — пассивное лечение).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">набор: морковь, картофель, капуста</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍅</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.02</div>
-              <div class="q-name">Соус и томатный суп</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Tomato Sauce, затем Tomato Soup.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× томатов + бутылочки</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥩</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.03</div>
-              <div class="q-name">Мясное рагу</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Beef Stew.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× говядина + картофель</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐰</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.04</div>
-              <div class="q-name">Кроличье рагу</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Rabbit Stew.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">2× крольчатина + морковь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🦴</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.05</div>
-              <div class="q-name">Костный бульон</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Bone Broth.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× кость — на будущий собачий корм</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐟</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.06</div>
-              <div class="q-name">Рыбные похлёбки</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Fish Stew и Baked Cod Stew.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">треска/лосось + сухие водоросли</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍚</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.07</div>
-              <div class="q-name">Жареный рис</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь Fried Rice.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× рис + яйцо</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍄</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.08</div>
-              <div class="q-name">Грибной рис</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь Mushroom Rice.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">грибная колония + споры</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍝</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.09</div>
-              <div class="q-name">Паста с фрикадельками</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Raw Pasta и свари Pasta with Meatballs.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× сырая паста + соус</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥗</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.10</div>
-              <div class="q-name">Смешанный салат</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Mixed Salad на верстаке.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">семена овощей + ведро воды</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍓</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.11</div>
-              <div class="q-name">Фруктовый салат</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Fruit Salad.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">сладкие ягоды + яблоки</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#f2c14e">4</div>
-          <div class="stage-title">
-            <span class="tag">Этап 04 · 12 квестов</span>
-            <h2>Высокая кухня</h2>
-            <span class="desc">Премиум-блюда с Nourishment, пиршества на компанию, пироги и напитки-зелья.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍗</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.01</div>
-              <div class="q-name">Жареная курица</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Пиршество Roast Chicken — ставится и едят из миски.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Курицы</em> + миски</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍖</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.02</div>
-              <div class="q-name">Медовый окорок</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Пиршество Honey Glazed Ham (Nourishment 5 мин).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× мёд + свинина</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥧</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.03</div>
-              <div class="q-name">Пастуший пирог</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Пиршество Shepherd's Pie.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">баранина + картофель</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🎃</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.04</div>
-              <div class="q-name">Фаршированная тыква</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Пиршество Stuffed Pumpkin.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">семена тыквы + рис</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍣</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.05</div>
-              <div class="q-name">Ассорти роллов</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Пиршество Rice Roll Medley — режется на отдельные роллы.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">лосось/треска + сухие водоросли</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍝</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.06</div>
-              <div class="q-name">Высокая паста</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Squid Ink Pasta, Vegetable Noodles или Pasta with Mutton Chop.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× паста + чернила кальмара</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧁</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.07</div>
-              <div class="q-name">Пироги и торты</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Испеки Sweet Berry Cheesecake / Chocolate Pie и нарежь ножом.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">яйца + сахар + коржи</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍫</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.08</div>
-              <div class="q-name">Горячее какао</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Hot Cocoa (снимает 1 негативный эффект).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× какао-бобы + молоко</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍎</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.09</div>
-              <div class="q-name">Яблочный сидр</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Apple Cider (даёт Absorption I).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× яблоки + стеклянные бутылочки</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍮</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.10</div>
-              <div class="q-name">Светящийся крем</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Glow Berry Custard.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">светящиеся ягоды + бутылочки</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍉</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.11</div>
-              <div class="q-name">Сок и эскимо</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Melon Juice и Melon Popsicle.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">семена арбуза + лёд</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐕</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.12</div>
-              <div class="q-name">Корм для питомцев</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Dog Food и Horse Feed.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Волка + 2× Лошади</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#9bcb3c">5</div>
-          <div class="stage-title">
-            <span class="tag">Этап 05 · 6 квестов</span>
-            <h2>Пекло · Nether's Delight</h2>
-            <span class="desc">Кухня Нижнего мира: чернокаменная печь, адские грядки, хоглины и стрейдеры.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔥</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.01</div>
-              <div class="q-name">Адская кухня</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Печь из чернокамня (Blackstone Stove).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× чернокамень</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌱</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.02</div>
-              <div class="q-name">Адские грядки</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Вырасти адский нарост и Propelplant Cane.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× адский нарост</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍢</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.03</div>
-              <div class="q-name">Адский шашлык</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь Nether Skewer из хоглиньей вырезки.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">хоглинья вырезка + угольки</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐗</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.04</div>
-              <div class="q-name">Фаршированный хоглин</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Пиршество Stuffed Hoglin.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Хоглина</em> + миски</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍄</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.05</div>
-              <div class="q-name">Тёмный салат</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Nether Salad из багровых/искажённых грибов.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× грибов Нижнего</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌶️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.06</div>
-              <div class="q-name">Жгучая похлёбка</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Острое блюдо со Strider.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× яйцо призыва Лавапрыга</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#3fc6c2">6</div>
-          <div class="stage-title">
-            <span class="tag">Этап 06 · 6 квестов</span>
-            <h2>Край света · End's Delight</h2>
-            <span class="desc">Кулинария Энда: эндерская печь, филе шалкеров, хорус-блюда и редкие эффекты.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌫️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.01</div>
-              <div class="q-name">Эндерская печь</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Endstone Stove и Chorus Fruit Crate.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× эндер-камень</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔪</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.02</div>
-              <div class="q-name">Филе шалкера</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Добудь Shulker Fillet ножом на доске.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× шалкеровая ракушка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍝</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.03</div>
-              <div class="q-name">Жемчужная паста</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь Pearl Pasta.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× эндер-жемчуг</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥘</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.04</div>
-              <div class="q-name">Эндер-паэлья</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Свари Ender Paella (даёт Resistance).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× хорус-фрукт</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥧</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.05</div>
-              <div class="q-name">Хорус-десерты</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Chorus Pie и Chorus Stew.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× цветок хоруса</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐚</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.06</div>
-              <div class="q-name">Фаршированный шалкер</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Финальное пиршество Stuffed Shulker.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× шалкеровая ракушка + трофей левитации</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#b07ad6">7</div>
-          <div class="stage-title">
-            <span class="tag">Этап 07 · 7 квестов</span>
-            <h2>Мастер-повар · аддоны и финал</h2>
-            <span class="desc">Брожение (Brewin' & Chewin'), мировая кухня (Cultural Delights / Delightful) и большой финал.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛢️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.01</div>
-              <div class="q-name">Бродильня</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Brewin' & Chewin': скрафти Бочку брожения.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">бочка + закваска/дрожжи</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍺</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.02</div>
-              <div class="q-name">Первая бражка</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сбреди напиток — эль или медовуху.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">стопка бутылок + ячмень/мёд</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧀</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.03</div>
-              <div class="q-name">Брожёная закуска</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай ферментированную еду (сыр / закуску).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× молоко</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍱</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.04</div>
-              <div class="q-name">Мировая кухня</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Cultural Delights: приготовь Суши, Карри и Тако.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">набор экзотических ингредиентов</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌮</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.05</div>
-              <div class="q-name">Гурман без границ</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь 5 блюд из Cultural Delights / Delightful.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">редкие семена культур аддонов</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍽️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.06</div>
-              <div class="q-name">Пир на весь мир</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Выставь все 5+ пиршеств одновременно за одним столом.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">декор-набор кухни: шкафы, ящики, вывески</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⭐</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 7.07</div>
-              <div class="q-name">Шеф-повар НМТП</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь и съешь каждое блюдо ванильного FD (как «Eat a course of every meal»).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">нетеритовый нож + золотой котёл-трофей</div>
-          </div>
-        </article></div>
-      </section></main>
-    <section class="closing"><h3>Логика наград</h3><p>Вырастил культуру → семена + ведро воды, чтобы ферма не стояла. Приготовил блюдо → ингредиент для следующего рецепта. Добыл мясо / пожарил стейк → 2 яйца призыва существа; приготовил из него блюдо → ещё 2 яйца на следующего зверя.</p></section>
-  </div>
-  <div class="mod" style="--accent:#2fd6c6;--accent-dim:#1c9488;--bgA:#0b1417;--bgB:#0f1d1b">
-    <header class="hero">
-      <div class="eyebrow">Tech · переработка руды · ядерная и термоядерная энергия</div>
-      <h1>Индустрия <span class="ac">Mekanism</span></h1>
-      <p class="sub">6 этапов прогрессии IC-наследника: от теплогенератора и стали до x5-переработки, деления, синтеза и антиматерии. Аддоны Generators / Tools / Additions вплетены в этапы.</p>
-      <div class="legend">
-        <span><i class="dot-task"></i>задача</span>
-        <span><i class="dot-rew"></i>награда</span>
-        <span><i class="dot-star">★</i>сложность / объём</span>
-      </div>
-    </header>
-    <main class="timeline">
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#ff7a3d">1</div>
-          <div class="stage-title">
-            <span class="tag">Этап 01 · 7 квестов</span>
-            <h2>Розжиг</h2>
-            <span class="desc">Энергия и сталь — фундамент всего мода.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚙️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.01</div>
-              <div class="q-name">Тепловой генератор</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Heat Generator</b>, запитай лавой/топливом.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× универсальных кабелей + уголь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔩</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.02</div>
-              <div class="q-name">Осмиевая жила</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Добудь осмий и выплавь слитки.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× осмий + железная кирка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏭</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.03</div>
-              <div class="q-name">Металлургический инфузер</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Metallurgic Infuser</b> и запитай.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× железо + редстоун</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧱</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.04</div>
-              <div class="q-name">Сталь</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Enriched Iron → Steel Dust → выплавь <b>Steel</b>.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× сталь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔋</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.05</div>
-              <div class="q-name">Энергетическая таблетка</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Energy Tablet и Steel Casing.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× золото</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🟣</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.06</div>
-              <div class="q-name">Базовая схема</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Basic Control Circuit и Infused Alloy.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× базовая схема</em> для след. машины</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪓</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.07</div>
-              <div class="q-name">Атомный дизассемблер</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Mekanism Tools: скрафти Atomic Disassembler.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">паксель (Paxel)</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#2fd6c6">2</div>
-          <div class="stage-title">
-            <span class="tag">Этап 02 · 6 квестов</span>
-            <h2>Удвоение руды · x2</h2>
-            <span class="desc">Первая переработка: камера обогащения, печь, дробилка, фабрики.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">✨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.01</div>
-              <div class="q-name">Камера обогащения</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти <b>Enrichment Chamber</b>.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">2× базовая схема + сталь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⛏️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.02</div>
-              <div class="q-name">Двойная руда</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Переработай руду в 2× пыль и выплавь.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">стопка железной руды + энергия</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔥</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.03</div>
-              <div class="q-name">Энергетическая печь</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Energized Smelter.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× уголь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.04</div>
-              <div class="q-name">Дробилка</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Crusher.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>4× обогащённый редстоун</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌀</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.05</div>
-              <div class="q-name">Обогащённые материалы</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Enriched Carbon/Redstone (x8 эффективность).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× редстоун</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔧</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.06</div>
-              <div class="q-name">Фабрика · Basic</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Через Tier Installer сделай Basic Factory.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>Tier Installer</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#3a9be0">3</div>
-          <div class="stage-title">
-            <span class="tag">Этап 03 · 6 квестов</span>
-            <h2>Утроение · x3 + газы</h2>
-            <span class="desc">Газовая химия: электролизёр, очистка, инфузер, реактивный ранец.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.01</div>
-              <div class="q-name">Электролизёр</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Electrolytic Separator: вода → водород + кислород.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">4× ведро воды + бак</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧪</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.02</div>
-              <div class="q-name">Камера очистки</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Purification Chamber: руда → 3 куска (x3).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× усиленный сплав</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛢️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.03</div>
-              <div class="q-name">Газовый бак</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Basic Gas Tank.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× осмий</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚗️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.04</div>
-              <div class="q-name">Химический инфузер</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Chemical Infuser: получи HCl.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>продвинутая схема</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🚀</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.05</div>
-              <div class="q-name">Реактивный ранец</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Jetpack на водороде.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">бак водорода + чарджпад</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏭</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.06</div>
-              <div class="q-name">Фабрика · Advanced</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Advanced Factory — 5 слотов.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">Tier Installer (Advanced)</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#a06bdb">4</div>
-          <div class="stage-title">
-            <span class="tag">Этап 04 · 6 квестов</span>
-            <h2>x4 / x5 и продвинутая техника</h2>
-            <span class="desc">Слизь, кристаллы, очищенный обсидиан, шахтёр, QIO.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💉</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.01</div>
-              <div class="q-name">Камера хим. инъекций</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Chemical Injection Chamber — x4.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× элитная схема</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌫️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.02</div>
-              <div class="q-name">Растворение и кристаллы</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Dissolution → Washer → Crystallizer (x5).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">серная кислота + слитки</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪙</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.03</div>
-              <div class="q-name">Очищенный обсидиан</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Refined Obsidian Ingot (Osmium Compressor).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>атомный сплав</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⛏️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.04</div>
-              <div class="q-name">Цифровой шахтёр</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Digital Miner + фильтры.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">фильтры + энергия</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌐</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.05</div>
-              <div class="q-name">Квантовый телепортёр</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Quantum Entangloporter (энергия/газ/предметы).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">телепорт-узлы</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">📡</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.06</div>
-              <div class="q-name">QIO-хранилище</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери QIO Drive Array + Dashboard.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">QIO Drive</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#f2c14e">5</div>
-          <div class="stage-title">
-            <span class="tag">Этап 05 · 6 квестов</span>
-            <h2>Ядерная эра</h2>
-            <span class="desc">Деление, охлаждение, отходы, MekaSuit, турбина. Осторожно — радиация!</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌬️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.01</div>
-              <div class="q-name">Генераторы</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Mekanism Generators: ветряки, био- и газогенератор.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">Advanced Solar Generator</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">☢️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.02</div>
-              <div class="q-name">Деление</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Fission Reactor и держи <1200K.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>4× полониевые пеллеты</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧊</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.03</div>
-              <div class="q-name">Охлаждение</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Подведи воду или натрий-теплоноситель.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">натриевый теплоноситель</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛡️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.04</div>
-              <div class="q-name">Утилизация отходов</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Безопасно перерабатывай ядерные отходы.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">радиационная защита</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💠</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.05</div>
-              <div class="q-name">МекаКостюм</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти MekaSuit + Meka-Tool (полоний).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>модуль улучшения MekaSuit</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚡</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.06</div>
-              <div class="q-name">Паровая турбина</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Industrial Turbine на паре реактора.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">большой запас энергии</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#e5484d">6</div>
-          <div class="stage-title">
-            <span class="tag">Этап 06 · 5 квестов</span>
-            <h2>Синтез и антиматерия</h2>
-            <span class="desc">Термояд, SPS, антиматерия, креативный полёт — финал.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌟</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.01</div>
-              <div class="q-name">Термоядерный реактор</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Запусти Fusion Reactor (дейтерий/тритий).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">лазер-модуль + гогглы</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔭</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.02</div>
-              <div class="q-name">SPS</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Supercritical Phase Shifter.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>антиматериальные пеллеты</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧬</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.03</div>
-              <div class="q-name">Антиматерия</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Получи первую антиматерию.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">гранулятор-трофей</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛩️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.04</div>
-              <div class="q-name">Креативный полёт</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Прокачай MekaSuit до полёта.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">набор модулей: vision, jetpack, teleport</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏆</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.05</div>
-              <div class="q-name">Мастер Mekanism</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Заверши x5-переработку и собери Робита.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">Робит-компаньон + золотой инфузер-трофей</div>
-          </div>
-        </article></div>
-      </section></main>
-    <section class="closing"><h3>Логика наград</h3><p>Переработал руду → больше сырья + сплав для следующей машины. Собрал машину → схема/Tier Installer следующего тира. Дошёл до реактора → полоний на MekaSuit, а синтез → антиматерия-трофей.</p></section>
-  </div>
-  <div class="mod" style="--accent:#e23a4a;--accent-dim:#9c2330;--bgA:#100608;--bgB:#1d0a0e">
-    <header class="hero">
-      <div class="eyebrow">RPG · кровь · фракции · ритуалы · лорды</div>
-      <h1>Кровь и <span class="ac">Vampirism</span></h1>
-      <p class="sub">6 этапов на две фракции: путь Вампира и путь Охотника, ритуалы и алтари, навыки, лорды с миньонами. Аддоны Bloodlines, Vampiric Ageing, Vampire's Delight, Werewolves в финале.</p>
-      <div class="legend">
-        <span><i class="dot-task"></i>задача</span>
-        <span><i class="dot-rew"></i>награда</span>
-        <span><i class="dot-star">★</i>сложность / объём</span>
-      </div>
-    </header>
-    <main class="timeline">
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#e23a4a">1</div>
-          <div class="stage-title">
-            <span class="tag">Этап 01 · 5 квестов</span>
-            <h2>Обращение</h2>
-            <span class="desc">Выбор пути: стать вампиром или охотником на них.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🦇</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.01</div>
-              <div class="q-name">Укус судьбы</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Заразись Sanguinare Vampiris (укус/инъекция) и обратись.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>4× бутыль крови</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">✝️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.02</div>
-              <div class="q-name">Или путь Охотника</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Останься человеком и вступи в охотники.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">деревянный кол + чеснок</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🩸</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.03</div>
-              <div class="q-name">Первая кровь</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Выпей кровь животного или жителя.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× бутыль крови</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚰️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.04</div>
-              <div class="q-name">Гроб</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти и поставь Гроб, чтобы спать днём.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× тёмных замковых кирпича</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌑</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.05</div>
-              <div class="q-name">Алтарь вдохновения</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Подними уровень 2–4 на Altar of Inspiration.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>очко навыка</em> + кровь</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#b01e34">2</div>
-          <div class="stage-title">
-            <span class="tag">Этап 02 · 6 квестов</span>
-            <h2>Молодая кровь · Вампир</h2>
-            <span class="desc">Алтарь вливания, первые навыки, вампирский лес и барон.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧛</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.01</div>
-              <div class="q-name">Алтарь Вливания</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Построй Altar of Infusion с пилларами (очки структуры).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>чистая кровь (Pure Blood)</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🦇</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.02</div>
-              <div class="q-name">Облик летучей мыши</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Открой навык Bat Transformation.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">очко навыка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">👁️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.03</div>
-              <div class="q-name">Ночное зрение</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Открой Night Vision и скорость.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">очко навыка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🗡️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.04</div>
-              <div class="q-name">Кровавое оружие</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти вампирский меч и заряди кровью.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">кровавый точильный камень</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌲</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.05</div>
-              <div class="q-name">Вампирский лес</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Найди биом и логово вампиров.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× клыки + книга вампира</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🦹</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.06</div>
-              <div class="q-name">Барон вампиров</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Победи Vampire Baron, добудь ритуальный предмет.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>предмет для ритуала уровня</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#8e2ad6">3</div>
-          <div class="stage-title">
-            <span class="tag">Этап 03 · 4 квестов</span>
-            <h2>Высший вампир</h2>
-            <span class="desc">Уровни 5–14, мощные навыки и природная броня.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⬆️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.01</div>
-              <div class="q-name">Уровни 5–14</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Прокачайся ритуалами до 14 уровня.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>3× очко навыка</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🩹</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.02</div>
-              <div class="q-name">Воскрешение павших</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Открой навык Revive the Fallen.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">очко навыка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌫️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.03</div>
-              <div class="q-name">Телепортация</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Открой навык телепорта/тумана.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">очко навыка</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛡️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.04</div>
-              <div class="q-name">Природная броня</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Достигни брони уровня алмаза без брони.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">плащ вампира</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#c9962e">4</div>
-          <div class="stage-title">
-            <span class="tag">Этап 04 · 5 квестов</span>
-            <h2>Арсенал Охотника</h2>
-            <span class="desc">Альтернативная ветка: столы, тренер, оружие против лордов.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏹</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.01</div>
-              <div class="q-name">Стол охотника</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Hunter Table + Weapon/Potion Table.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>интел (intel)</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">✝️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.02</div>
-              <div class="q-name">Тренер охотников</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Заплати чистой кровью/клыками, поднимись в уровне.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">арбалет охотника</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚒️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.03</div>
-              <div class="q-name">Оружейник</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Прокачай ветку Weapon Smith.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">усиленные болты</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧪</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.04</div>
-              <div class="q-name">Мастер зелий</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Ветка Brewing Master + антивампирские зелья.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">чесночные бомбы</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔪</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.05</div>
-              <div class="q-name">Heartseeker / Heartstriker</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти оружие против вампиров-лордов.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">освящённое серебро</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#7a1020">5</div>
-          <div class="stage-title">
-            <span class="tag">Этап 05 · 5 квестов</span>
-            <h2>Лорд и миньоны</h2>
-            <span class="desc">Стань лордом, призывай и веди свою свиту.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">👑</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.01</div>
-              <div class="q-name">«Достоин ли ты?»</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Стань Лордом/Мастером-охотником через задания представителя.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>minion binding / equipment</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧟</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.02</div>
-              <div class="q-name">Первый миньон</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Призови и снаряди миньона.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">снаряжение миньона</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏰</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.03</div>
-              <div class="q-name">Ранги</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поднимись Baron→Viscount→Count→Duke→Prince (или Lieutenant→…→Brigadier).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>+слот миньона</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚔️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.04</div>
-              <div class="q-name">Армия</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Управляй пятью миньонами одновременно.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">набор брони для миньонов</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔆</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.05</div>
-              <div class="q-name">Маяк фракции</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поставь Beacon, найми Expert-жителя.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">торговля чистой кровью</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#5b3fd6">6</div>
-          <div class="stage-title">
-            <span class="tag">Этап 06 · 5 квестов</span>
-            <h2>Кровные линии · аддоны</h2>
-            <span class="desc">Bloodlines, Vampiric Ageing, Vampire's Delight, Werewolves.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧬</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.01</div>
-              <div class="q-name">Bloodlines</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Выбери линию (Zealot/Noble/Ectotherm/Bloodknight) через квест.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>Bloodline Fang + ранг</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⏳</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.02</div>
-              <div class="q-name">Vampiric Ageing</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Начни старение после 14 ур., повышай Age Rank.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">бонус возраста</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🍷</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.03</div>
-              <div class="q-name">Vampire's Delight</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Приготовь кровавые блюда (интеграция с Farmer's Delight).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">кровавый ингредиент</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🐺</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.04</div>
-              <div class="q-name">Werewolves</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Родственный мод: обратись в оборотня, качай укус.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">очко навыка оборотня</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏆</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.05</div>
-              <div class="q-name">Владыка ночи</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Достигни макс. ранга лорда и кровной линии.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">корона-трофей + плащ</div>
-          </div>
-        </article></div>
-      </section></main>
-    <section class="closing"><h3>Логика наград</h3><p>Покормился / поднял уровень → кровь + очко навыка. Победил барона → ритуальный предмет для следующего алтаря. Стал лордом → minion binding, а ранги дают новые слоты миньонов.</p></section>
-  </div>
-  <div class="mod" style="--accent:#d8a13a;--accent-dim:#9a7022;--bgA:#0f1419;--bgB:#141d24">
-    <header class="hero">
-      <div class="eyebrow">Кинетика · контрапции · пар и поезда · электричество</div>
-      <h1>Машинерия <span class="ac">Create</span></h1>
-      <p class="sub">6 этапов: от водяного колеса и андезита до латуни, секвенс-сборки, паровых поездов, электричества (Crafts & Additions / New Age) и больших проектов. Steam 'n' Rails, Deco, Big Cannons, Enchantment Industry.</p>
-      <div class="legend">
-        <span><i class="dot-task"></i>задача</span>
-        <span><i class="dot-rew"></i>награда</span>
-        <span><i class="dot-star">★</i>сложность / объём</span>
-      </div>
-    </header>
-    <main class="timeline">
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#9aa3ad">1</div>
-          <div class="stage-title">
-            <span class="tag">Этап 01 · 6 квестов</span>
-            <h2>Андезит и вращение</h2>
-            <span class="desc">Базовая кинетика: колесо, валы, шестерни, пресс, пила.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔧</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.01</div>
-              <div class="q-name">Первое вращение</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поставь Hand Crank / Water Wheel / Windmill Bearing.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× вал + андезит</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚙️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.02</div>
-              <div class="q-name">Андезитовый сплав</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Andesite Alloy.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>16× андезитовый сплав</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚙️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.03</div>
-              <div class="q-name">Шестерни</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Cogwheel + Large Cogwheel.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× шестерни</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪚</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.04</div>
-              <div class="q-name">Механическая пила</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поставь Mechanical Saw.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× доски</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🗜️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.05</div>
-              <div class="q-name">Механический пресс</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Штампуй листы прессом.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>8× железный лист</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🥽</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.06</div>
-              <div class="q-name">Снаряжение инженера</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Engineer's Goggles + Wrench.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">гогглы</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#d8a13a">2</div>
-          <div class="stage-title">
-            <span class="tag">Этап 02 · 6 квестов</span>
-            <h2>Обработка и латунь</h2>
-            <span class="desc">Вентилятор, цинк, латунь, дробильные колёса, электронные лампы.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌪️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.01</div>
-              <div class="q-name">Вентилятор</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Encased Fan: мойка/копчение/обдув лавой.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">промытый гравий + железо</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🟡</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.02</div>
-              <div class="q-name">Цинк и латунь</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Добудь цинк, сделай Brass в Mixer.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>16× латунь</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪣</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.03</div>
-              <div class="q-name">Бассейн и миксер</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поставь Basin + Mechanical Mixer.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× медный лист</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔩</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.04</div>
-              <div class="q-name">Дробильные колёса</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Crushing Wheels: руда → x2 дроблёнка.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× дроблёная руда</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">📜</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.05</div>
-              <div class="q-name">Развёртка</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поставь Deployer.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× латунь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧩</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.06</div>
-              <div class="q-name">Электронная лампа</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Brass Casing + Electron Tube.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>4× электронная лампа</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#c87f4a">3</div>
-          <div class="stage-title">
-            <span class="tag">Этап 03 · 6 квестов</span>
-            <h2>Сборка и автоматизация</h2>
-            <span class="desc">Рука, крафтеры, секвенс-сборка, табло и логистика.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🤖</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.01</div>
-              <div class="q-name">Механическая рука</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Mechanical Arm.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× латунь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛠️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.02</div>
-              <div class="q-name">Механический крафтер</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Mechanical Crafters для авто-сборки.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>точный механизм</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔁</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.03</div>
-              <div class="q-name">Sequenced Assembly</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Precision Mechanism по цепочке.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">2× точный механизм</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⏱️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.04</div>
-              <div class="q-name">Регулятор скорости</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Rotational Speed Controller.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">латунь + шестерни</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">📦</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.05</div>
-              <div class="q-name">Воронки и туннели</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Funnels + Smart/Brass Tunnels на лентах.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× конвейерная лента</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🖥️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.06</div>
-              <div class="q-name">Дисплеи</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Display Link + Display Board (табло).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× андезитовый сплав</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#5b8fb0">4</div>
-          <div class="stage-title">
-            <span class="tag">Этап 04 · 5 квестов</span>
-            <h2>Пар и поезда</h2>
-            <span class="desc">Blaze Burner, паровой двигатель, поезда и Steam 'n' Rails.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔥</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.01</div>
-              <div class="q-name">Blaze Burner</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Поймай ифрита, собери Blaze Burner + Cake.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">топливный пирог</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌡️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.02</div>
-              <div class="q-name">Паровой двигатель</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Boiler + Steam Engine (вода + тепло).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× лист латуни</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🚂</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.03</div>
-              <div class="q-name">Первый поезд</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Train Tracks + Station + Train Assembly.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>32× рельсы</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛤️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.04</div>
-              <div class="q-name">Steam 'n' Rails</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Деревянные/монорельсы, проводник, сцепка вагонов.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">семафоры + шапка проводника</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">📯</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.05</div>
-              <div class="q-name">Сигналы и гудки</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Train Signals + Steam Whistle.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× латунь</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#9d6bd6">5</div>
-          <div class="stage-title">
-            <span class="tag">Этап 05 · 5 квестов</span>
-            <h2>Электричество и продвинутое</h2>
-            <span class="desc">Crafts & Additions, New Age, Enchantment Industry, Diesel.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚡</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.01</div>
-              <div class="q-name">Crafts & Additions</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Electric Motor + Alternator: мост FE ↔ вращение.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>провода + аккумулятор</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔋</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.02</div>
-              <div class="q-name">Накопление энергии</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Подключи аккумуляторы и connector.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">электромотор</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">✨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.03</div>
-              <div class="q-name">Enchantment Industry</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Автоматизируй зачарование (Liquid XP + Blaze).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">жидкий опыт</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛢️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.04</div>
-              <div class="q-name">Diesel Generators</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Нефтяная вышка + дизель-генератор.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">бочка нефти</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪐</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.05</div>
-              <div class="q-name">Create: New Age</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Динамо и электросеть нового поколения.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">продвинутый провод</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#6fa84a">6</div>
-          <div class="stage-title">
-            <span class="tag">Этап 06 · 5 квестов</span>
-            <h2>Большие проекты и декор</h2>
-            <span class="desc">Big Cannons, Deco, гигантские контрапции — финал.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💣</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.01</div>
-              <div class="q-name">Create: Big Cannons</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери большую пушку и выстрели.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">32× порох + ядро</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🎨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.02</div>
-              <div class="q-name">Deco / Copycats+</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Промышленный декор и копикаты.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">декор-набор</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏗️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.03</div>
-              <div class="q-name">Гигантская контрапция</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Построй движущуюся машину (drill/harvester rig).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">суперклей + контрапшн-карт</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧱</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.04</div>
-              <div class="q-name">Фабрика-конвейер</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Полностью автоматизируй производство одного блока.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">64× латунь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏆</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.05</div>
-              <div class="q-name">Мастер-инженер</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Заверши секвенс-сборку высшего предмета и авто-завод.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">золотой гаечный ключ-трофей</div>
-          </div>
-        </article></div>
-      </section></main>
-    <section class="closing"><h3>Логика наград</h3><p>Поставил генератор → шестерни и андезитовый сплав. Собрал пресс → листы. Дошёл до латуни → точные механизмы и электронные лампы. Запустил поезд → рельсы и станция для расширения сети.</p></section>
-  </div>
-  <div class="mod" style="--accent:#f2b21a;--accent-dim:#a87a0e;--bgA:#13110c;--bgB:#1d1a10">
-    <header class="hero">
-      <div class="eyebrow">IC2-наследник · пар → электричество → фотоника → космос</div>
-      <h1>Магнат <span class="ac">Industrial Upgrade</span></h1>
-      <p class="sub">6 этапов по прогрессии [IU] denfop: рудные жилы и пар, электрическая эра (наследие Super Solar Panels), модули, ядерная и фотонная энергия, генетика и колонизация планет.</p>
-      <div class="legend">
-        <span><i class="dot-task"></i>задача</span>
-        <span><i class="dot-rew"></i>награда</span>
-        <span><i class="dot-star">★</i>сложность / объём</span>
-      </div>
-    </header>
-    <main class="timeline">
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#b98a4a">1</div>
-          <div class="stage-title">
-            <span class="tag">Этап 01 · 6 квестов</span>
-            <h2>Примитивная эра</h2>
-            <span class="desc">Рудные жилы, молот, коксовая печь, сталь, первый пар.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⛏️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.01</div>
-              <div class="q-name">Рудная жила</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Найди и пробури Ore Vein, добудь сырьё.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>дроблёная руда</em> + молот</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.02</div>
-              <div class="q-name">Стальной молот</div>
-              <div class="stars">★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Steel Hammer для расплющивания пластин.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× железная пластина</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏭</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.03</div>
-              <div class="q-name">Коксовая печь</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Coke Oven: кокс + креозот.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× кокс</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧱</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.04</div>
-              <div class="q-name">Сталь</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Выплавь сталь (кокс + железо).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× сталь</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.05</div>
-              <div class="q-name">Паровой котёл</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери Steam Boiler (мультиблок).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">паровые трубы + вода</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚙️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 1.06</div>
-              <div class="q-name">Механический корпус</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Mechanical Casing.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>2× корпус</em></div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#d49a3a">2</div>
-          <div class="stage-title">
-            <span class="tag">Этап 02 · 5 квестов</span>
-            <h2>Паровые машины</h2>
-            <span class="desc">Карьер, переработка, прокатка, агрокультура.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⛏️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.01</div>
-              <div class="q-name">Паровой карьер</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Steam Quarry — автодобыча.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">запас угля и руды</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪨</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.02</div>
-              <div class="q-name">Паровой мацератор</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Переработай руду паром (x2).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× руда</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛞</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.03</div>
-              <div class="q-name">Паровая прокатка</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Steam Rolling Machine: пластины.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>16× пластина</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔥</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.04</div>
-              <div class="q-name">Улучшенная коксовая печь</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Проапгрейдь печь.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× креозот</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌾</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 2.05</div>
-              <div class="q-name">Агрокультура</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Запусти Agrocultures / очиститель почвы.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">семена + удобрение</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#3aa0e0">3</div>
-          <div class="stage-title">
-            <span class="tag">Этап 03 · 6 квестов</span>
-            <h2>Электрическая эра</h2>
-            <span class="desc">Провода, солнечные панели, батареи, схемы, EU.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔌</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.01</div>
-              <div class="q-name">Провода и изоляторы</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай Wire Insulators, проведи электролинию.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× медный провод</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">☀️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.02</div>
-              <div class="q-name">Солнечная панель</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти Solar Panel (наследие Super Solar Panels).</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>продвинутая солнечная панель</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔋</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.03</div>
-              <div class="q-name">Батарея</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти RE-Battery / аккумулятор.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">заряженный редстоун</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚡</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.04</div>
-              <div class="q-name">Конвертер тока</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Electric Current Converter + Charger.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">зарядник</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🖥️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.05</div>
-              <div class="q-name">Электросхемы</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Сделай электрические схемы и процессоры.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>4× схема</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏭</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 3.06</div>
-              <div class="q-name">Электрофабрика</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Электрический мацератор/печь с модулями.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">модуль продуктивности</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#8a98a5">4</div>
-          <div class="stage-title">
-            <span class="tag">Этап 04 · 5 квестов</span>
-            <h2>Модули и автоматизация</h2>
-            <span class="desc">Модули, пуллеры, продвинутый карьер, очистка, торговля.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧩</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.01</div>
-              <div class="q-name">Модули</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Установи модули продуктивности/скорости в машины.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">2× модуль скорости</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">📦</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.02</div>
-              <div class="q-name">Пуллеры и пушеры</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Puller/Pusher модули + трубы.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">16× труба</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏗️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.03</div>
-              <div class="q-name">Advanced Steam Quarry</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери продвинутый паровой карьер.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">запас ресурсов</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌫️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.04</div>
-              <div class="q-name">Очистка воздуха</div>
-              <div class="stars">★★★<span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Air Purification Station против pollution.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">фильтры</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔄</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 4.05</div>
-              <div class="q-name">Торговая машина</div>
-              <div class="stars">★★<span class='off'>★</span><span class='off'>★</span><span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Настрой Trading Machine.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">8× изумруд</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#7fd63a">5</div>
-          <div class="stage-title">
-            <span class="tag">Этап 05 · 5 квестов</span>
-            <h2>Ядерная и фотонная эра</h2>
-            <span class="desc">Реактор, радиация, фотонная энергия и машины.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">☢️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.01</div>
-              <div class="q-name">Ядерный реактор</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери реактор и управляй радиацией.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>урановые стержни</em> + защита</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🛡️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.02</div>
-              <div class="q-name">Радиационная броня</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти защитный костюм.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">антирад-капсулы</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">💥</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.03</div>
-              <div class="q-name">Ядерная бомба (осторожно)</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Скрафти, но не взрывай дома.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">продвинутые материалы</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🌟</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.04</div>
-              <div class="q-name">Фотонная энергия</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Перейди к Photonic Technology.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>фотонные ячейки</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🔆</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 5.05</div>
-              <div class="q-name">Фотонные машины</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Запитай машины фотонной энергией.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">фотонный процессор</div>
-          </div>
-        </article></div>
-      </section>
-      <section class="stage">
-        <div class="stage-head">
-          <div class="stage-num" style="background:#3fc6c2">6</div>
-          <div class="stage-title">
-            <span class="tag">Этап 06 · 6 квестов</span>
-            <h2>Генетика и космос</h2>
-            <span class="desc">Геномы, мутации, ракеты, колонии, квантовый карьер — финал.</span>
-          </div>
-        </div>
-        <div class="quests">
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧬</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.01</div>
-              <div class="q-name">Генетика</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Centrifuge + Incubator + RNA Assembler, изучи геномы.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">геном-образец</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🧪</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.02</div>
-              <div class="q-name">Мутатрон</div>
-              <div class="stars">★★★★<span class='off'>★</span></div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Mutatron + Genetic Stabilizer.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">улучшенный геном</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🚀</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.03</div>
-              <div class="q-name">Космическая программа</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Собери ракету/корабль.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext"><em>детали ракеты</em></div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🪐</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.04</div>
-              <div class="q-name">Колонизация</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Основай колонию на другой планете.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">космо-модуль</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">⚛️</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.05</div>
-              <div class="q-name">Квантовый карьер</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Quantum Quarry — массовая добыча.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">квантовый процессор</div>
-          </div>
-        </article>
-        <article class="q">
-          <div class="q-top">
-            <div class="icon">🏆</div>
-            <div class="q-headtext">
-              <div class="q-id">КВЕСТ 6.06</div>
-              <div class="q-name">Магнат индустрии</div>
-              <div class="stars">★★★★★</div>
-            </div>
-          </div>
-          <div class="q-task"><b>Задача:</b> Заверши все тиры: пар → электро → фотон → космос.</div>
-          <div class="reward">
-            <div class="rlabel">Награда</div>
-            <div class="rtext">золотой реактор-трофей</div>
-          </div>
-        </article></div>
-      </section></main>
-    <section class="closing"><h3>Логика наград</h3><p>Пробурил жилу → сырьё + пластины. Собрал паровую машину → кокс и сталь. Перешёл на электричество → схемы и батарея. Освоил фотонику → фотонные ячейки, а космос → детали ракеты для колонии.</p></section>
-  </div></body></html>
+      <div class="quests">${cards}</div>`;
+    board.appendChild(sec);
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+}
+select(0);
+</script>
+</body>
+</html>
